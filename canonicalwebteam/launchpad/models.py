@@ -151,6 +151,15 @@ class SnapBuilder(LaunchpadAuthenticator):
 
         return None
 
+    def get_snap(self, name):
+        """
+        Return a Snap from the Launchpad API by name
+        """
+
+        return self._request(
+            path=f"~{self.username}/+snap/{name}", method="GET"
+        )
+
     def create_snap(self, snap_name, git_url):
         """
         Create an ISnap in Launchpad
