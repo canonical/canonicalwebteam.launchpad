@@ -1,6 +1,42 @@
-# canonicalwebteam.launchpad-builds
+# canonicalwebteam.launchpad
 
-Classes for triggering builds of snaps and images through the launchpad API.
+Classes for triggering builds of snaps and Ubuntu images through the launchpad API.
+
+## Usage
+
+### SnapBuilder
+
+``` python3
+from canonicalwebteam.launchpad import SnapBuilder
+
+snap_builder = SnapBuilder(
+    username="build.snapcraft.io",
+    token=os.getenv("SNAP_BUILDER_TOKEN"),
+    secret=os.getenv("SNAP_BUILDER_SECRET"),
+)
+
+snap_name = "new-test-snap"
+git_repo = "https://github.com/build-staging-snapcraft-io/test1"
+snap_builder.create_snap(snap_name, git_repo)
+
+new_snap = snap_builder.get_snap_by_store_name("new-test-snap")
+```
+
+### ImageBuilder
+
+``` python3
+from canonicalwebteam.launchpad import ImageBuilder
+
+image_builder = ImageBuilder(
+    username="image.build",
+    token=os.getenv("IMAGE_BUILDER_TOKEN"),
+    secret=os.getenv("IMAGE_BUILDER_SECRET"),
+)
+
+image_builder.build_image(
+    board="cm3", system="core16", snaps=["code", "toto"]
+)
+```
 
 ## Test fixtures
 
