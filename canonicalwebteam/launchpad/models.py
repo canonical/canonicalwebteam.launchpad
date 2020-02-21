@@ -107,7 +107,10 @@ class ImageBuilder(LaunchpadAuthenticator):
         }
 
         return self._request(
-            path=f"~imagebuild/+livefs/ubuntu/{codename}/{project}",
+            path=(
+                f"~{self.username.replace('.', '')}/"
+                f"+livefs/ubuntu/{codename}/{project}"
+            ),
             method="post",
             data=data,
         )
@@ -127,7 +130,7 @@ class SnapBuilder(LaunchpadAuthenticator):
                 path="+snaps",
                 params={
                     "ws.op": "findByStoreName",
-                    "owner": "/~build.snapcraft.io",
+                    "owner": f"/~{self.username}",
                     "store_name": snap_name,
                 },
             )
