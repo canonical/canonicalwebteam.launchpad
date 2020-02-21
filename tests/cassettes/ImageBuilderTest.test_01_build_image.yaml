@@ -9,7 +9,7 @@ interactions:
       Content-Type: [application/x-www-form-urlencoded]
       User-Agent: [python-requests/2.22.0]
     method: POST
-    uri: https://api.launchpad.net/devel/~imagebuild/+livefs/ubuntu/bionic/ubuntu-core
+    uri: https://api.launchpad.net/devel/~imagebuild/+livefs/ubuntu/xenial/ubuntu-core
   response:
     body: {string: ''}
     headers:
@@ -17,9 +17,9 @@ interactions:
       Content-Length: ['0']
       Content-Security-Policy: [frame-ancestors 'self';]
       Content-Type: [text/plain;charset=utf-8]
-      Date: ['Fri, 21 Feb 2020 10:09:57 GMT']
+      Date: ['Fri, 21 Feb 2020 12:59:38 GMT']
       Keep-Alive: ['timeout=60, max=100']
-      Location: ['https://api.launchpad.net/devel/~imagebuild/+livefs/ubuntu/bionic/ubuntu-core/+build/204286']
+      Location: ['https://api.launchpad.net/devel/~imagebuild/+livefs/ubuntu/xenial/ubuntu-core/+build/204289']
       Server: [zope.server.http (HTTP)]
       Strict-Transport-Security: [max-age=15552000]
       Vary: [Accept]

@@ -88,6 +88,10 @@ class ImageBuilder(LaunchpadAuthenticator):
         system_year = re.match(r"^[^\d]+(?:64)?(\d{2})(\.\d{2})?$", system)[1]
         codename = self.system_codenames[system_year]
         arch_info = self.board_architectures[board][system]
+        project = "ubuntu-core"
+
+        if system.startswith("classic"):
+            project = "ubuntu-cpc"
 
         metadata = {"subarch": arch_info["subarch"], "extra_snaps": snaps}
 
@@ -103,7 +107,7 @@ class ImageBuilder(LaunchpadAuthenticator):
         }
 
         return self._request(
-            path="~imagebuild/+livefs/ubuntu/bionic/ubuntu-core",
+            path=f"~imagebuild/+livefs/ubuntu/{codename}/{project}",
             method="post",
             data=data,
         )
