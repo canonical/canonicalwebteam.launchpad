@@ -121,25 +121,31 @@ class SnapBuilder(LaunchpadAuthenticator):
     Methods for building snaps through the Launchpad API
     """
 
+    def get_collection_entries(self, path, params=None):
+        """
+        Return collection items from the API
+        """
+
+        collection = self._request(path=path, params=params)
+
+        return collection.json().get("entries", [])
+
     def get_snap_by_store_name(self, snap_name):
         """
         Return an Snap from the Launchpad API by store_name
         """
-        snaps = (
-            self._request(
-                path="+snaps",
-                params={
-                    "ws.op": "findByStoreName",
-                    "owner": f"/~{self.username}",
-                    "store_name": snap_name,
-                },
-            )
-            .json()
-            .get("entries", [])
+
+        snaps = self.get_collection_entries(
+            path="+snaps",
+            params={
+                "ws.op": "findByStoreName",
+                "owner": f"/~{self.username}",
+                "store_name": snap_name,
+            },
         )
 
-        # The Launchpad API only allow to perform a find by store_name
-        # but we are only interested in exactly this one
+        # The Launchpad API only allows to find by snaps by store_name
+        # but we are only interested in the first one
         if snaps and snaps[0]["store_name"] == snap_name:
             return snaps[0]
 
