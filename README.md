@@ -1,6 +1,6 @@
 # canonicalwebteam.launchpad
 
-Classes for triggering builds of snaps and Ubuntu images through the launchpad API.
+Classes for triggering builds of snaps and Ubuntu images through the [Launchpad API](https://launchpad.net/+apidoc/devel.html).
 
 ## Usage
 
