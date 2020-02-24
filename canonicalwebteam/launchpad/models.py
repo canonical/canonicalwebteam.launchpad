@@ -4,45 +4,13 @@ import re
 from hashlib import md5
 
 
-class LaunchpadAuthenticator:
+class Launchpad:
     """
-    A base class to providing authentication for making
-    requests to the Launchpad API
-    """
+    A collection of actions that can be performed against the Launchpad
+    API, coupled with simple authentication logic.
 
-    def __init__(self, username, token, secret, session):
-        """
-        This requires a session object because in the normal use-case
-        we will be passing through a `talisker.session.get_session()`
-        """
-
-        self.username = username
-        self.session = session
-        self.session.headers["Accept"] = "application/json"
-        self.session.headers["Authorization"] = (
-            f'OAuth oauth_version="1.0", '
-            f'oauth_signature_method="PLAINTEXT", '
-            f"oauth_consumer_key={username}, "
-            f'oauth_token="{token}", '
-            f'oauth_signature="&{secret}"'
-        )
-
-    def _request(self, path, method="GET", params={}, data={}):
-        """
-        Makes a raw HTTP request and returns the response.
-        """
-
-        url = f"https://api.launchpad.net/devel/{path}"
-
-        response = self.session.request(method, url, params=params, data=data)
-        response.raise_for_status()
-
-        return response
-
-
-class ImageBuilder(LaunchpadAuthenticator):
-    """
-    Build ubuntu images through the Launchpad API
+    At the time of writing, this is basically about building snaps
+    and building images.
     """
 
     system_codenames = {"16": "xenial", "18": "bionic"}
@@ -79,6 +47,35 @@ class ImageBuilder(LaunchpadAuthenticator):
         },
     }
 
+    def __init__(self, username, token, secret, session):
+        """
+        This requires a session object because in the normal use-case
+        we will be passing through a `talisker.session.get_session()`
+        """
+
+        self.username = username
+        self.session = session
+        self.session.headers["Accept"] = "application/json"
+        self.session.headers["Authorization"] = (
+            f'OAuth oauth_version="1.0", '
+            f'oauth_signature_method="PLAINTEXT", '
+            f"oauth_consumer_key={username}, "
+            f'oauth_token="{token}", '
+            f'oauth_signature="&{secret}"'
+        )
+
+    def _request(self, path, method="GET", params={}, data={}):
+        """
+        Makes a raw HTTP request and returns the response.
+        """
+
+        url = f"https://api.launchpad.net/devel/{path}"
+
+        response = self.session.request(method, url, params=params, data=data)
+        response.raise_for_status()
+
+        return response
+
     def build_image(self, board, system, snaps):
         """
         `board` is something like "raspberrypi3",
@@ -114,12 +111,6 @@ class ImageBuilder(LaunchpadAuthenticator):
             method="post",
             data=data,
         )
-
-
-class SnapBuilder(LaunchpadAuthenticator):
-    """
-    Methods for building snaps through the Launchpad API
-    """
 
     def get_collection_entries(self, path, params=None):
         """
