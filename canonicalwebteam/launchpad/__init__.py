@@ -1,4 +1,1 @@
-from canonicalwebteam.launchpad.models import (  # noqa: F401
-    ImageBuilder,
-    SnapBuilder,
-)
+from canonicalwebteam.launchpad.models import Launchpad  # noqa: F401
