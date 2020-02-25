@@ -214,13 +214,13 @@ class Launchpad:
         return self._request(
             path=f"~{self.username}/+snap/{lp_snap['name']}/+build/{build_id}",
             method="GET",
-        )
+        ).json()
 
     def get_snap_build_log(self, snap_name, build_id):
         """
         Return the log content of a snap build
         """
-        build = self.get_snap_build(snap_name, build_id).json()
+        build = self.get_snap_build(snap_name, build_id)
 
         response = self.session.request("GET", build["build_log_url"])
         response.raise_for_status()
