@@ -220,7 +220,7 @@ class Launchpad:
         """
         Return the log content of a snap build
         """
-        build = self.get_snap_build(snap_name, build_id)
+        build = self.get_snap_build(snap_name, build_id).json()
 
         response = self.session.request("GET", build["build_log_url"])
         response.raise_for_status()
