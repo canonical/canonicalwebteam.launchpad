@@ -6,3 +6,4 @@ v0.1.4, 2020-02-21 -- Add SnapBuilder.get_snap
 v0.2.0, 2020-02-24 -- Combine ImageBuilder and SnapBuilder into one Launchpad class
 v0.2.1, 2020-02-25 -- Added get_build and get_build_log methods
 v0.2.2, 2020-02-25 -- Fixed get_build_log method to convert get_build response to json
+v0.2.3, 2020-02-26 -- Added get_snap_builds
