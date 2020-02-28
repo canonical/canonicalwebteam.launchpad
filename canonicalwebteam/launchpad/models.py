@@ -187,7 +187,7 @@ class Launchpad:
         lp_snap = self.get_snap_by_store_name(snap_name)
 
         data = {
-            "ws.op": "requestBuild",
+            "ws.op": "requestBuilds",
             "channels": "snapcraft,apt",
             "archive": (
                 "https://api.launchpad.net/devel/ubuntu/+archive/primary"
@@ -195,13 +195,7 @@ class Launchpad:
             "pocket": "Updates",
         }
 
-        archs = ["amd64", "arm64", "armhf", "i386", "ppc64el", "s390x"]
-
-        for arch in archs:
-            data["distro_arch_series"] = f"/ubuntu/xenial/{arch}"
-            self._request(
-                path=lp_snap["self_link"][32:], method="POST", data=data
-            )
+        self._request(path=lp_snap["self_link"][32:], method="POST", data=data)
 
         return True
 
