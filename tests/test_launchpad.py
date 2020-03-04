@@ -52,7 +52,7 @@ class LaunchpadTest(VCRTestCase):
     def test_03_create_snap(self):
         snap_name = "new-test-snap"
         git_repo = "https://github.com/build-staging-snapcraft-io/test1"
-        self.lp_for_snaps.create_snap(snap_name, git_repo)
+        self.lp_for_snaps.create_snap(snap_name, git_repo, "macaroon")
 
         # Check that the snap exist
         new_snap = self.lp_for_snaps.get_snap_by_store_name("new-test-snap")
