@@ -58,6 +58,64 @@ interactions:
       code: 201
       message: Created
 - request:
+    body: ws.op=completeAuthorization&root_macaroon=macaroon
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '548'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - storefront (82e80f8ae4234617b3fd3caf6fc2ca22d24774d8;devel)
+    method: POST
+    uri: https://api.launchpad.net/devel/~build.snapcraft.io/+snap/57872c9265e7749eb552312d0ac74b79/
+  response:
+    body:
+      string: ''
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '0'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - text/plain;charset=utf-8
+      Date:
+      - Thu, 06 Feb 2020 11:59:23 GMT
+      Keep-Alive:
+      - timeout=60, max=100
+      Location:
+      - https://api.launchpad.net/devel/~build.snapcraft.io/+snap/57872c9265e7749eb552312d0ac74b79
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Content-Type-Warning:
+      - guessed from content
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 0a62c17273454a1313f81a74a2198ec30b44c7b6
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Created
+- request:
     body: null
     headers:
       Accept:

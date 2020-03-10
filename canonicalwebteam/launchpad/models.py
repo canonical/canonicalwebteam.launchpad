@@ -151,19 +151,20 @@ class Launchpad:
             path=f"~{self.username}/+snap/{name}", method="GET"
         )
 
-    def create_snap(self, snap_name, git_url):
+    def create_snap(self, snap_name, git_url, macaroon):
         """
         Create an ISnap in Launchpad
         """
 
+        lp_snap_name = md5(git_url.encode("UTF-8")).hexdigest()
+
         data = {
             "ws.op": "new",
             "owner": f"/~{self.username}",
-            "name": md5(git_url.encode("UTF-8")).hexdigest(),
+            "name": lp_snap_name,
             "store_name": snap_name,
             "git_repository_url": git_url,
             "git_path": "HEAD",
-            "auto_build": "false",
             "auto_build_archive": "/ubuntu/+archive/primary",
             "auto_build_pocket": "Updates",
             "processors": [
@@ -175,9 +176,36 @@ class Launchpad:
                 "/+processors/s390x",
             ],
             "store_series": "/+snappy-series/16",
+            "store_channels": ["edge"],
+            "store_upload": "true",
+            "auto_build": "true",
         }
 
-        return self._request(path="+snaps", method="POST", data=data)
+        self._request(path="+snaps", method="POST", data=data)
+
+        # Authorize uploads to the store from this user
+        data = {
+            "ws.op": "completeAuthorization",
+            "root_macaroon": macaroon,
+        }
+
+        self._request(
+            path=f"~{self.username}/+snap/{lp_snap_name}/",
+            method="POST",
+            data=data,
+        )
+
+        return True
+
+    def is_snap_building(self, snap_name):
+        """
+        Return True is the snap is being build in Launchpad
+        """
+        lp_snap = self.get_snap_by_store_name(snap_name)
+        request = self._request(
+            path=lp_snap["pending_builds_collection_link"][32:]
+        )
+        return request.json()["total_size"] > 0
 
     def build_snap(self, snap_name):
         """

@@ -8,3 +8,4 @@ v0.2.1, 2020-02-25 -- Added get_build and get_build_log methods
 v0.2.2, 2020-02-25 -- Fixed get_build_log method to convert get_build response to json
 v0.2.3, 2020-02-26 -- Added get_snap_builds
 v0.2.4, 2020-02-28 -- Changed build_snap method to use requestBuilds instead of requestBuild
+v0.2.5, 2020-03-10 -- Enable store upload when creating a Snap and added is_snap_building method
