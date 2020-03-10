@@ -178,7 +178,7 @@ class Launchpad:
             "store_series": "/+snappy-series/16",
             "store_channels": ["edge"],
             "store_upload": "true",
-            "auto_build": "true",
+            "auto_build": "false",
         }
 
         self._request(path="+snaps", method="POST", data=data)
