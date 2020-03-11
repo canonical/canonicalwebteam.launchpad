@@ -149,7 +149,7 @@ class Launchpad:
 
         return self._request(
             path=f"~{self.username}/+snap/{name}", method="GET"
-        )
+        ).json()
 
     def create_snap(self, snap_name, git_url, macaroon):
         """
@@ -206,6 +206,26 @@ class Launchpad:
             path=lp_snap["pending_builds_collection_link"][32:]
         )
         return request.json()["total_size"] > 0
+
+    def cancel_snap_builds(self, snap_name):
+        """
+        Cancel the builds if it is either pending or in progress.
+        """
+        lp_snap = self.get_snap_by_store_name(snap_name)
+        builds = self.get_collection_entries(
+            path=lp_snap["pending_builds_collection_link"][32:]
+        )
+
+        data = {
+            "ws.op": "cancel",
+        }
+
+        for build in builds:
+            self._request(
+                path=build["self_link"][32:], method="POST", data=data,
+            )
+
+        return True
 
     def build_snap(self, snap_name):
         """
