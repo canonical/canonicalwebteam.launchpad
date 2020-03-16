@@ -184,10 +184,7 @@ class Launchpad:
         self._request(path="+snaps", method="POST", data=data)
 
         # Authorize uploads to the store from this user
-        data = {
-            "ws.op": "completeAuthorization",
-            "root_macaroon": macaroon,
-        }
+        data = {"ws.op": "completeAuthorization", "root_macaroon": macaroon}
 
         self._request(
             path=f"~{self.username}/+snap/{lp_snap_name}/",
@@ -216,13 +213,11 @@ class Launchpad:
             path=lp_snap["pending_builds_collection_link"][32:]
         )
 
-        data = {
-            "ws.op": "cancel",
-        }
+        data = {"ws.op": "cancel"}
 
         for build in builds:
             self._request(
-                path=build["self_link"][32:], method="POST", data=data,
+                path=build["self_link"][32:], method="POST", data=data
             )
 
         return True
@@ -233,15 +228,16 @@ class Launchpad:
         """
 
         lp_snap = self.get_snap_by_store_name(snap_name)
+        channels = lp_snap.get("auto_build_channels")
 
         data = {
             "ws.op": "requestBuilds",
-            "channels": "snapcraft,apt",
-            "archive": (
-                "https://api.launchpad.net/devel/ubuntu/+archive/primary"
-            ),
-            "pocket": "Updates",
+            "archive": lp_snap["auto_build_archive_link"],
+            "pocket": lp_snap["auto_build_pocket"],
         }
+
+        if channels:
+            data["channels"] = channels
 
         self._request(path=lp_snap["self_link"][32:], method="POST", data=data)
 
