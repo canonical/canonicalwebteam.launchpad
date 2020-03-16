@@ -11,3 +11,5 @@ v0.2.4, 2020-02-28 -- Changed build_snap method to use requestBuilds instead of 
 v0.2.5, 2020-03-10 -- Enable store upload when creating a Snap and added is_snap_building method
 v0.2.6, 2020-03-10 -- Create snaps with auto_build disabled
 v0.2.7, 2020-03-11 -- Added cancel_snap_builds method
+v0.2.8, 2020-03-16 -- Trigger build with correct parameters
+
