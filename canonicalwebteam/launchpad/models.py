@@ -276,3 +276,14 @@ class Launchpad:
         response.raise_for_status()
 
         return response.text
+
+    def delete_snap(self, snap_name):
+        """
+        Delete an ISnap in Launchpad
+        """
+
+        lp_snap = self.get_snap_by_store_name(snap_name)
+
+        self._request(path=lp_snap["self_link"][32:], method="DELETE")
+
+        return True

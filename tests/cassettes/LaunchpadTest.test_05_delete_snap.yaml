@@ -1,0 +1,118 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.snapcraft.io&store_name=new-test-snap
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA8VWy27bMBD8lYA9urIo2XrQtwIt0A9oT00gUOTKIkKTLEnZcIP020vKcSy7AWo0
+        QHKStNTO7uxjpAfktaeyceIXoNVN9vEGOU+tD/c43IPyVoALTz8ewoG20LCeKgVytN2FVzj10Ejq
+        fLPRXHQCeDhBOc5xgvMEl9+ybFWQVb6Yk0Ve18sZxiuM0Rgo4g1Gahp9OiodBPNa+MZC10ih7iNU
+        771xqzSlRswlHRTrDeVzBT7lsAWZzsLL6dcvnz5HTGPFNiQ0gdtB+xfUOczvdhCSz52ihlna+bnQ
+        6Sw+pUVVVzkjeVlAVS0JtEWRL7KcY8qqZVuRGLG1NGAdQ6hBymCkg9fNCDvJ5GScFvHJw1jNwDlt
+        XcO0lMC80OrqGvw/hfQUGD0X32gnQnP2F6wYVU/tagKTsX0TehZ+DiI0dCusH6gMAxXJezvEQwOK
+        C7U+0H9zimfB0XkrqGW92MLVeQztoPyQzp78Qv3Ehtr9OAojoNODZdCELWqplJMCvQv3E+ezKjSx
+        W+D8u7biOYlRDUBev/OvW1kunLdhgCFq28WMc3DMChPrMVlnKfWuEcqDDTmcpjpui6G+jykfFSim
+        3oCn62i8RawltCSEAMvZslpgUhbLmocEu5yzJcZdV5Qkr7OElwsgNcXLIi9YURWkIy3Hebboqo6W
+        NSvKriUVZ7cIHVSt1/r+rdt3DHuS7/Mi/lusYxyzTw5uaVa+IDqDlVOocNoP7ZzpzWGYk/CBWocZ
+        Sp4JJIGAD3OURbCOCgn8faf8xRxicopuomSia6b0UN+jh4JdEjmOrNEot0eh2Zvr1evDyX0dt4Aq
+        /5qCRCS9U2BfCzL+RTAL4XL1/0OYCCPBHwv91k2+DH/xXTGa3Y9agb6byM6hx7vHP+bUvnNvCQAA
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '684'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 02 Apr 2020 17:09:39 GMT
+      Keep-Alive:
+      - timeout=60, max=100
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - a296f04231dee355be5db73cc878b9e21689a253
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - python-requests/2.23.0
+    method: DELETE
+    uri: https://api.launchpad.net/devel/~build.snapcraft.io/+snap/57872c9265e7749eb552312d0ac74b79
+  response:
+    body:
+      string: 'null'
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '4'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 02 Apr 2020 17:09:39 GMT
+      Keep-Alive:
+      - timeout=60, max=99
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - a296f04231dee355be5db73cc878b9e21689a253
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+version: 1

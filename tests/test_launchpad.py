@@ -61,3 +61,7 @@ class LaunchpadTest(VCRTestCase):
     def test_04_build_snap(self):
         result = self.lp_for_snaps.build_snap("toto")
         self.assertEqual(True, result)
+
+    def test_05_delete_snap(self):
+        result = self.lp_for_snaps.delete_snap("new-test-snap")
+        self.assertEqual(True, result)
