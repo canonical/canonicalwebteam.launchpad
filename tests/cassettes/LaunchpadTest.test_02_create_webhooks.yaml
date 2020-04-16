@@ -1,0 +1,175 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://api.launchpad.net/devel/~imagebuild/+livefs/ubuntu/bionic/ubuntu-core/webhooks
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA71TyW7bMBD9FYM9OhIXLZZ06U/klgQCRY5kIrQokJSDJEi+vUM7bdwFaJNDIQLi
+        EHrLjB6fSXRR2j6YJyDdhl9tSIjSR9wz3MMcvYGA1c0z0TJCb2WI/cFpMxrQeE4EEyxjJa5rITrG
+        urLOW1bWdbnFgjGCNBqsOYJ/7FdvE2Yf4xI6SjUEM805Kk5mnvJ1WOe45sod6FdzkBPkw2qsTgwJ
+        0QN+l+C3pNWV4KLQo9yJolKyKDVXEnYAdTu0TdNUUA1DVWd8LIud5EPNuFD4gBJaVjvd1uVY1W3R
+        ci1aXYhbklQ8TCZEL+fYWzPfX1qVi8mtXGe1X6TOZ4ho/giWvp6M/vD5AMNv0J9hFwC6TWMZAz03
+        TgfjZqPeqkw5D3SLhHvn7ikXDecXs8S/0itnLaiIqM/Y/bA6fZdORiQqH1Nool8hZeWIaenj43LO
+        CzmzdyetjuWc3KVwgR3/i9nTqFJglQd8/RpVXndl1XGRcyFE07xH1UNwq1dwauSfnX55004MeH0m
+        +FSA/t4kebn7s8fNB0xmCwpm30nIyzdxnY/+BAQAAA==
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '430'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 13 Apr 2020 10:18:52 GMT
+      Keep-Alive:
+      - timeout=60, max=100
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 2e26c9bbd21cdca248baaea29aeffb920afcc32a
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://api.launchpad.net/devel/~imagebuild/+livefs/ubuntu/bionic/ubuntu-cpc/webhooks
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAzXMMQ7CMAxG4atEZqVN51wFoci0v0jUKLFiFwSIu7cDbO9b3oesGZeo+Q0Kbjo7
+        UuNuv0a1nqGHLteDHdq2PiPaSxBLriu54CiZiQbvWfJYeKtzEl7GCvMLHij+9MQttbYOwncM/wl9
+        d810Kdl9AAAA
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '123'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 13 Apr 2020 10:18:52 GMT
+      Keep-Alive:
+      - timeout=60, max=99
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 2e26c9bbd21cdca248baaea29aeffb920afcc32a
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+- request:
+    body: ws.op=newWebhook&delivery_url=https%3A%2F%2Fdesign.staging.ubuntu.com%2F%3Fimage.build&event_types=livefs%3Abuild%3A0.1
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '119'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.23.0
+    method: POST
+    uri: https://api.launchpad.net/devel/~imagebuild/+livefs/ubuntu/bionic/ubuntu-cpc
+  response:
+    body:
+      string: ''
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '0'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - text/plain;charset=utf-8
+      Date:
+      - Mon, 13 Apr 2020 10:18:52 GMT
+      Keep-Alive:
+      - timeout=60, max=98
+      Location:
+      - https://api.launchpad.net/devel/~imagebuild/+livefs/ubuntu/bionic/ubuntu-cpc/+webhook/12883
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Content-Type-Warning:
+      - guessed from content
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 2e26c9bbd21cdca248baaea29aeffb920afcc32a
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 201
+      message: Created
+version: 1

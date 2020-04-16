@@ -4,6 +4,10 @@ import re
 from hashlib import md5
 
 
+class WebhookExistsError(Exception):
+    pass
+
+
 class Launchpad:
     """
     A collection of actions that can be performed against the Launchpad
@@ -64,17 +68,69 @@ class Launchpad:
             f'oauth_signature="&{secret}"'
         )
 
-    def _request(self, path, method="GET", params={}, data={}):
+    def request(self, url, method="get", params=None, data=None, json=None):
         """
-        Makes a raw HTTP request and returns the response.
+        Make a request through the configured API session
         """
 
-        url = f"https://api.launchpad.net/devel/{path}"
-
-        response = self.session.request(method, url, params=params, data=data)
+        response = self.session.request(
+            url=url, method=method, params=params, data=data, json=json
+        )
         response.raise_for_status()
 
         return response
+
+    def get_collection_entries(self, url, params=None):
+        """
+        Return collection items from the API
+        """
+
+        return self.request(url, params=params).json().get("entries", [])
+
+    def create_system_build_webhook(self, system, delivery_url):
+        """
+        Create a webhook for the given system to trigger when a
+        build is created or updates, if it doesn't exist already.
+        If it exists, raise WebhookExistsError
+        """
+
+        system_year = re.match(r"^[^\d]+(?:64)?(\d{2})(\.\d{2})?$", system)[1]
+        codename = self.system_codenames[system_year]
+        project = "ubuntu-core"
+        if system.startswith("classic"):
+            project = "ubuntu-cpc"
+
+        webhooks = self.get_collection_entries(
+            "https://api.launchpad.net/devel/"
+            f"~{self.username.replace('.', '')}/"
+            f"+livefs/ubuntu/{codename}/{project}/webhooks"
+        )
+
+        for webhook in webhooks:
+            if (
+                webhook["delivery_url"] == delivery_url
+                and "livefs:build:0.1" in webhook["event_types"]
+            ):
+                # Webhook already exists
+                raise WebhookExistsError(
+                    "Webhook already exists for a 'livefs:build:0.1' "
+                    f"event with delivery_url {delivery_url}"
+                )
+
+        # Else, create it
+        return self.request(
+            (
+                "https://api.launchpad.net/devel/"
+                f"~{self.username.replace('.', '')}/"
+                f"+livefs/ubuntu/{codename}/{project}"
+            ),
+            method="post",
+            data={
+                "ws.op": "newWebhook",
+                "delivery_url": delivery_url,
+                "event_types": ["livefs:build:0.1"],
+            },
+        )
 
     def build_image(self, board, system, snaps):
         """
@@ -103,8 +159,9 @@ class Launchpad:
             "metadata_override": json.dumps(metadata),
         }
 
-        return self._request(
-            path=(
+        return self.request(
+            (
+                "https://api.launchpad.net/devel/"
                 f"~{self.username.replace('.', '')}/"
                 f"+livefs/ubuntu/{codename}/{project}"
             ),
@@ -112,22 +169,13 @@ class Launchpad:
             data=data,
         )
 
-    def get_collection_entries(self, path, params=None):
-        """
-        Return collection items from the API
-        """
-
-        collection = self._request(path=path, params=params)
-
-        return collection.json().get("entries", [])
-
     def get_snap_by_store_name(self, snap_name):
         """
         Return an Snap from the Launchpad API by store_name
         """
 
         snaps = self.get_collection_entries(
-            path="+snaps",
+            "https://api.launchpad.net/devel/+snaps",
             params={
                 "ws.op": "findByStoreName",
                 "owner": f"/~{self.username}",
@@ -147,9 +195,9 @@ class Launchpad:
         Return a Snap from the Launchpad API by name
         """
 
-        return self._request(
-            path=f"~{self.username}/+snap/{name}", method="GET"
-        ).json()
+        return self.request(
+            f"https://api.launchpad.net/devel/~{self.username}/+snap/{name}"
+        )
 
     def create_snap(self, snap_name, git_url, macaroon):
         """
@@ -181,14 +229,19 @@ class Launchpad:
             "auto_build": "false",
         }
 
-        self._request(path="+snaps", method="POST", data=data)
+        self.request(
+            "https://api.launchpad.net/devel/+snaps", method="post", data=data
+        )
 
         # Authorize uploads to the store from this user
         data = {"ws.op": "completeAuthorization", "root_macaroon": macaroon}
 
-        self._request(
-            path=f"~{self.username}/+snap/{lp_snap_name}/",
-            method="POST",
+        self.request(
+            (
+                "https://api.launchpad.net/devel/"
+                f"~{self.username}/+snap/{lp_snap_name}/"
+            ),
+            method="post",
             data=data,
         )
 
@@ -198,27 +251,27 @@ class Launchpad:
         """
         Return True is the snap is being build in Launchpad
         """
+
         lp_snap = self.get_snap_by_store_name(snap_name)
-        request = self._request(
-            path=lp_snap["pending_builds_collection_link"][32:]
+        pending_builds = self.request(
+            lp_snap["pending_builds_collection_link"]
         )
-        return request.json()["total_size"] > 0
+        return pending_builds["total_size"] > 0
 
     def cancel_snap_builds(self, snap_name):
         """
         Cancel the builds if it is either pending or in progress.
         """
+
         lp_snap = self.get_snap_by_store_name(snap_name)
         builds = self.get_collection_entries(
-            path=lp_snap["pending_builds_collection_link"][32:]
+            lp_snap["pending_builds_collection_link"]
         )
 
         data = {"ws.op": "cancel"}
 
         for build in builds:
-            self._request(
-                path=build["self_link"][32:], method="POST", data=data
-            )
+            self.request(build["self_link"], method="post", data=data)
 
         return True
 
@@ -239,7 +292,7 @@ class Launchpad:
         if channels:
             data["channels"] = channels
 
-        self._request(path=lp_snap["self_link"][32:], method="POST", data=data)
+        self.request(lp_snap["self_link"], method="post", data=data)
 
         return True
 
@@ -248,10 +301,9 @@ class Launchpad:
         Return list of builds from a Snap from the Launchpad API
         """
         lp_snap = self.get_snap_by_store_name(snap_name)
-        builds = self.get_collection_entries(
-            # Remove first part of the URL
-            lp_snap["builds_collection_link"][32:]
-        )
+
+        # Remove first part of the URL
+        builds = self.get_collection_entries(lp_snap["builds_collection_link"])
 
         return sorted(builds, key=lambda x: x["datecreated"], reverse=True)
 
@@ -259,21 +311,22 @@ class Launchpad:
         """
         Return a Snap Build from the Launchpad API
         """
+
         lp_snap = self.get_snap_by_store_name(snap_name)
 
-        return self._request(
-            path=f"~{self.username}/+snap/{lp_snap['name']}/+build/{build_id}",
-            method="GET",
-        ).json()
+        return self.request(
+            "https://api.launchpad.net/devel/"
+            f"~{self.username}/+snap/{lp_snap['name']}/+build/{build_id}"
+        )
 
     def get_snap_build_log(self, snap_name, build_id):
         """
         Return the log content of a snap build
         """
+
         build = self.get_snap_build(snap_name, build_id)
 
-        response = self.session.request("GET", build["build_log_url"])
-        response.raise_for_status()
+        response = self.request(build["build_log_url"])
 
         return response.text
 
@@ -284,6 +337,6 @@ class Launchpad:
 
         lp_snap = self.get_snap_by_store_name(snap_name)
 
-        self._request(path=lp_snap["self_link"][32:], method="DELETE")
+        self.request(lp_snap["self_link"], method="delete")
 
         return True

@@ -68,3 +68,4 @@ dist/
 .eggs/
 .webcache/
 
+.venv
