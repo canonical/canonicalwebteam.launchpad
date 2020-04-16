@@ -87,7 +87,7 @@ class Launchpad:
 
         return self.request(url, params=params).json().get("entries", [])
 
-    def create_system_build_webhook(self, system, delivery_url):
+    def create_system_build_webhook(self, system, delivery_url, secret):
         """
         Create a webhook for the given system to trigger when a
         build is created or updates, if it doesn't exist already.
@@ -129,6 +129,7 @@ class Launchpad:
                 "ws.op": "newWebhook",
                 "delivery_url": delivery_url,
                 "event_types": ["livefs:build:0.1"],
+                "secret": secret,
             },
         )
 
