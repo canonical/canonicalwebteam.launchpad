@@ -44,11 +44,15 @@ class LaunchpadTest(VCRTestCase):
         print(getenv("IMAGE_BUILDS_SECRET", "secret"))
         with self.assertRaises(WebhookExistsError):
             self.lp_for_images.create_system_build_webhook(
-                "core18", "https://design.staging.ubuntu.com/?image.build"
+                "core18",
+                "https://design.staging.ubuntu.com/?image.build",
+                "fake-secret",
             )
 
         response = self.lp_for_images.create_system_build_webhook(
-            "classic18.04", "https://design.staging.ubuntu.com/?image.build"
+            "classic18.04",
+            "https://design.staging.ubuntu.com/?image.build",
+            "fake-secret",
         )
 
         self.assertEqual(response.status_code, 201)
