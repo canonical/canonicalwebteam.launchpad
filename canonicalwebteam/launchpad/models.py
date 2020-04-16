@@ -132,7 +132,7 @@ class Launchpad:
             },
         )
 
-    def build_image(self, board, system, snaps):
+    def build_image(self, board, system, snaps, metadata={}):
         """
         `board` is something like "raspberrypi3",
         `system` is something like "classic6418.04"
@@ -146,7 +146,8 @@ class Launchpad:
         if system.startswith("classic"):
             project = "ubuntu-cpc"
 
-        metadata = {"subarch": arch_info["subarch"], "extra_snaps": snaps}
+        metadata["subarch"] = arch_info["subarch"]
+        metadata["extra_snaps"] = snaps
 
         data = {
             "ws.op": "requestBuild",

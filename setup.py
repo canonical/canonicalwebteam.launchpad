@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="canonicalwebteam.launchpad",
-    version="0.3.0",
+    version="0.3.1",
     author="Canonical webteam",
     author_email="webteam@canonical.com",
     url=(
