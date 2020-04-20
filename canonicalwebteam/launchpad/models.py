@@ -3,6 +3,9 @@ import json
 import re
 from hashlib import md5
 
+# Packages
+import gnupg
+
 
 class WebhookExistsError(Exception):
     pass
@@ -133,7 +136,7 @@ class Launchpad:
             },
         )
 
-    def build_image(self, board, system, snaps, metadata={}):
+    def build_image(self, board, system, snaps, author_info, gpg_passphrase):
         """
         `board` is something like "raspberrypi3",
         `system` is something like "classic6418.04"
@@ -147,8 +150,20 @@ class Launchpad:
         if system.startswith("classic"):
             project = "ubuntu-cpc"
 
-        metadata["subarch"] = arch_info["subarch"]
-        metadata["extra_snaps"] = snaps
+        gpg = gnupg.GPG()
+        encrypted_author_info = gpg.encrypt(
+            json.dumps(author_info),
+            recipients=None,
+            symmetric="AES256",
+            passphrase=gpg_passphrase,
+            armor=True,
+        )
+        metadata = {
+            "_author_data": encrypted_author_info.data.decode("utf-8"),
+            "subarch": arch_info["subarch"],
+            "extra_snaps": snaps,
+            "project": project,
+        }
 
         data = {
             "ws.op": "requestBuild",

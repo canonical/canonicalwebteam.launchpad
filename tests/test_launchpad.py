@@ -34,7 +34,11 @@ class LaunchpadTest(VCRTestCase):
 
     def test_01_build_image(self):
         response = self.lp_for_images.build_image(
-            board="cm3", system="core16", snaps=["code", "toto"]
+            board="cm3",
+            system="core16",
+            snaps=["code", "toto"],
+            author_info={"name": "somename", "email": "someemail"},
+            gpg_passphrase="fakepassword",
         )
 
         self.assertEqual(response.status_code, 201)
