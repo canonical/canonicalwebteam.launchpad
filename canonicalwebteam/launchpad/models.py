@@ -3,6 +3,9 @@ import json
 import re
 from hashlib import md5
 
+# Packages
+import gnupg
+
 
 class WebhookExistsError(Exception):
     pass
@@ -87,7 +90,7 @@ class Launchpad:
 
         return self.request(url, params=params).json().get("entries", [])
 
-    def create_system_build_webhook(self, system, delivery_url):
+    def create_system_build_webhook(self, system, delivery_url, secret):
         """
         Create a webhook for the given system to trigger when a
         build is created or updates, if it doesn't exist already.
@@ -129,10 +132,11 @@ class Launchpad:
                 "ws.op": "newWebhook",
                 "delivery_url": delivery_url,
                 "event_types": ["livefs:build:0.1"],
+                "secret": secret,
             },
         )
 
-    def build_image(self, board, system, snaps, metadata={}):
+    def build_image(self, board, system, snaps, author_info, gpg_passphrase):
         """
         `board` is something like "raspberrypi3",
         `system` is something like "classic6418.04"
@@ -146,8 +150,20 @@ class Launchpad:
         if system.startswith("classic"):
             project = "ubuntu-cpc"
 
-        metadata["subarch"] = arch_info["subarch"]
-        metadata["extra_snaps"] = snaps
+        gpg = gnupg.GPG()
+        encrypted_author_info = gpg.encrypt(
+            json.dumps(author_info),
+            recipients=None,
+            symmetric="AES256",
+            passphrase=gpg_passphrase,
+            armor=True,
+        )
+        metadata = {
+            "_author_data": encrypted_author_info.data.decode("utf-8"),
+            "subarch": arch_info["subarch"],
+            "extra_snaps": snaps,
+            "project": project,
+        }
 
         data = {
             "ws.op": "requestBuild",

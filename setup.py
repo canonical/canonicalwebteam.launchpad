@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="canonicalwebteam.launchpad",
-    version="0.3.1",
+    version="0.4.0",
     author="Canonical webteam",
     author_email="webteam@canonical.com",
     url=(
@@ -18,5 +18,6 @@ setup(
     packages=find_packages(),
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
+    install_requires=["python-gnupg>=0.4.6"],
     tests_require=["vcrpy-unittest"],
 )

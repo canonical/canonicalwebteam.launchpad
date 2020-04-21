@@ -34,7 +34,11 @@ class LaunchpadTest(VCRTestCase):
 
     def test_01_build_image(self):
         response = self.lp_for_images.build_image(
-            board="cm3", system="core16", snaps=["code", "toto"]
+            board="cm3",
+            system="core16",
+            snaps=["code", "toto"],
+            author_info={"name": "somename", "email": "someemail"},
+            gpg_passphrase="fakepassword",
         )
 
         self.assertEqual(response.status_code, 201)
@@ -44,11 +48,15 @@ class LaunchpadTest(VCRTestCase):
         print(getenv("IMAGE_BUILDS_SECRET", "secret"))
         with self.assertRaises(WebhookExistsError):
             self.lp_for_images.create_system_build_webhook(
-                "core18", "https://design.staging.ubuntu.com/?image.build"
+                "core18",
+                "https://design.staging.ubuntu.com/?image.build",
+                "fake-secret",
             )
 
         response = self.lp_for_images.create_system_build_webhook(
-            "classic18.04", "https://design.staging.ubuntu.com/?image.build"
+            "classic18.04",
+            "https://design.staging.ubuntu.com/?image.build",
+            "fake-secret",
         )
 
         self.assertEqual(response.status_code, 201)
