@@ -54,11 +54,14 @@ class Launchpad:
         },
     }
 
-    def __init__(self, username, token, secret, session):
+    def __init__(self, username, token, secret, session, auth_consumer=None):
         """
         This requires a session object because in the normal use-case
         we will be passing through a `talisker.session.get_session()`
         """
+
+        if not auth_consumer:
+            auth_consumer = username
 
         self.username = username
         self.session = session
@@ -66,7 +69,7 @@ class Launchpad:
         self.session.headers["Authorization"] = (
             f'OAuth oauth_version="1.0", '
             f'oauth_signature_method="PLAINTEXT", '
-            f"oauth_consumer_key={username}, "
+            f"oauth_consumer_key={auth_consumer}, "
             f'oauth_token="{token}", '
             f'oauth_signature="&{secret}"'
         )
@@ -105,7 +108,7 @@ class Launchpad:
 
         webhooks = self.get_collection_entries(
             "https://api.launchpad.net/devel/"
-            f"~{self.username.replace('.', '')}/"
+            f"~{self.username}/"
             f"+livefs/ubuntu/{codename}/{project}/webhooks"
         )
 
@@ -124,7 +127,7 @@ class Launchpad:
         return self.request(
             (
                 "https://api.launchpad.net/devel/"
-                f"~{self.username.replace('.', '')}/"
+                f"~{self.username}/"
                 f"+livefs/ubuntu/{codename}/{project}"
             ),
             method="post",
@@ -179,7 +182,7 @@ class Launchpad:
         return self.request(
             (
                 "https://api.launchpad.net/devel/"
-                f"~{self.username.replace('.', '')}/"
+                f"~{self.username}/"
                 f"+livefs/ubuntu/{codename}/{project}"
             ),
             method="post",

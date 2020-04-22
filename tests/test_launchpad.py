@@ -25,10 +25,11 @@ class LaunchpadTest(VCRTestCase):
             session=requests.Session(),
         )
         self.lp_for_images = Launchpad(
-            username="image.build",
+            username="imagebuild",
             token=getenv("IMAGE_BUILDS_TOKEN", "secret"),
             secret=getenv("IMAGE_BUILDS_SECRET", "secret"),
             session=requests.Session(),
+            auth_consumer="image.build",
         )
         return super().setUp()
 
