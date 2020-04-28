@@ -166,6 +166,7 @@ class Launchpad:
             "subarch": arch_info["subarch"],
             "extra_snaps": snaps,
             "project": project,
+            "image_format": "ubuntu-image",
         }
 
         data = {
