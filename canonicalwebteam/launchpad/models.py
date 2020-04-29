@@ -25,21 +25,12 @@ class Launchpad:
         "raspberrypi2": {
             "core16": {"arch": "armhf", "subarch": "raspi2"},
             "core18": {"arch": "armhf", "subarch": "raspi3"},
-            "classic16.04": {"arch": "armhf", "subarch": "raspi3"},
-            "classic18.04": {"arch": "armhf", "subarch": "raspi3"},
         },
         "raspberrypi3": {
             "core16": {"arch": "armhf", "subarch": "raspi3"},
             "core18": {"arch": "armhf", "subarch": "raspi3"},
-            "classic16.04": {"arch": "armhf", "subarch": "raspi3"},
-            "classic18.04": {"arch": "armhf", "subarch": "raspi3"},
-            "classic6418.04": {"arch": "arm64", "subarch": "raspi3"},
         },
-        "raspberrypi4": {
-            "core18": {"arch": "armhf", "subarch": "raspi3"},
-            "classic18.04": {"arch": "armhf", "subarch": "raspi3"},
-            "classic6418.04": {"arch": "arm64", "subarch": "raspi3"},
-        },
+        "raspberrypi4": {"core18": {"arch": "armhf", "subarch": "raspi3"}},
         "intelnuc": {
             "core16": {"arch": "amd64", "subarch": ""},
             "core18": {"arch": "amd64", "subarch": ""},
