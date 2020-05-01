@@ -1,4 +1,1 @@
-from canonicalwebteam.launchpad.models import (  # noqa: F401
-    Launchpad,
-    WebhookExistsError,
-)
+from canonicalwebteam.launchpad.models import Launchpad  # noqa: F401

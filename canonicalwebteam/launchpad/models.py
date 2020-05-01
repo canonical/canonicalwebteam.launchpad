@@ -7,10 +7,6 @@ from hashlib import md5
 import gnupg
 
 
-class WebhookExistsError(Exception):
-    pass
-
-
 class Launchpad:
     """
     A collection of actions that can be performed against the Launchpad
@@ -84,7 +80,7 @@ class Launchpad:
 
         return self.request(url, params=params).json().get("entries", [])
 
-    def create_system_build_webhook(self, system, delivery_url, secret):
+    def create_update_system_build_webhook(self, system, delivery_url, secret):
         """
         Create a webhook for the given system to trigger when a
         build is created or updates, if it doesn't exist already.
@@ -108,10 +104,11 @@ class Launchpad:
                 webhook["delivery_url"] == delivery_url
                 and "livefs:build:0.1" in webhook["event_types"]
             ):
-                # Webhook already exists
-                raise WebhookExistsError(
-                    "Webhook already exists for a 'livefs:build:0.1' "
-                    f"event with delivery_url {delivery_url}"
+                # If webhook exists, let's update the secret
+                return self.request(
+                    webhook["self_link"],
+                    method="post",
+                    data={"ws.op": "setSecret", "secret": secret},
                 )
 
         # Else, create it

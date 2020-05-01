@@ -6,7 +6,7 @@ import requests
 from vcr_unittest import VCRTestCase
 
 # Local
-from canonicalwebteam.launchpad import Launchpad, WebhookExistsError
+from canonicalwebteam.launchpad import Launchpad
 
 
 class LaunchpadTest(VCRTestCase):
@@ -45,16 +45,7 @@ class LaunchpadTest(VCRTestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_02_create_webhooks(self):
-        print(getenv("IMAGE_BUILDS_TOKEN", "secret"))
-        print(getenv("IMAGE_BUILDS_SECRET", "secret"))
-        with self.assertRaises(WebhookExistsError):
-            self.lp_for_images.create_system_build_webhook(
-                "core18",
-                "https://design.staging.ubuntu.com/?image.build",
-                "fake-secret",
-            )
-
-        response = self.lp_for_images.create_system_build_webhook(
+        response = self.lp_for_images.create_update_system_build_webhook(
             "classic18.04",
             "https://design.staging.ubuntu.com/?image.build",
             "fake-secret",
