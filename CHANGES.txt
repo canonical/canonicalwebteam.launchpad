@@ -20,3 +20,4 @@ v0.5.0, 2020-04-23 -- Added auth_consumer in the constructor method
 v0.5.1, 2020-04-28 -- Fix image builds by providing image_format=ubuntu-image
 v0.6.0, 2020-04-29 -- Remove classic from image builder support
 v0.7.0, 2020-05-01 -- Update secret in system build webhooks
+v0.7.1, 2020-05-11 -- Fix method is_snap_building

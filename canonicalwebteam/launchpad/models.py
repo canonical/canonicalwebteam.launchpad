@@ -264,7 +264,7 @@ class Launchpad:
         lp_snap = self.get_snap_by_store_name(snap_name)
         pending_builds = self.request(
             lp_snap["pending_builds_collection_link"]
-        )
+        ).json()
         return pending_builds["total_size"] > 0
 
     def cancel_snap_builds(self, snap_name):
