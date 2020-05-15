@@ -78,3 +78,10 @@ class LaunchpadTest(VCRTestCase):
     def test_05_delete_snap(self):
         result = self.lp_for_snaps.delete_snap("new-test-snap")
         self.assertEqual(True, result)
+
+    def test_06_get_builders_status(self):
+        result = self.lp_for_snaps.get_builders_status()
+
+        for architecture in result.values():
+            self.assertIn("pending_builds", architecture.keys())
+            self.assertIn("estimated_duration", architecture.keys())
