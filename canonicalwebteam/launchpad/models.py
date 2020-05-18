@@ -41,6 +41,17 @@ class Launchpad:
         },
     }
 
+    virtual_builders_architectures = [
+        "amd64",
+        "arm64",
+        "armel",
+        "armhf",
+        "i386",
+        "powerpc",
+        "ppc64el",
+        "s390x",
+    ]
+
     def __init__(self, username, token, secret, session, auth_consumer=None):
         """
         This requires a session object because in the normal use-case
@@ -79,6 +90,29 @@ class Launchpad:
         """
 
         return self.request(url, params=params).json().get("entries", [])
+
+    def get_builders_status(self):
+        """
+        Return virtual builders status in Launchpad
+        """
+        response = self.request(
+            "https://api.launchpad.net/devel/builders",
+            params={"ws.op": "getBuildQueueSizes"},
+        ).json()
+
+        data = {}
+        for arch in self.virtual_builders_architectures:
+            data[arch] = {}
+
+            # The API could not return an architecture if it doesn't have jobs
+            if arch not in response["virt"]:
+                data[arch]["pending_builds"] = 0
+                data[arch]["estimated_duration"] = None
+            else:
+                data[arch]["pending_builds"] = response["virt"][arch][0]
+                data[arch]["estimated_duration"] = response["virt"][arch][1]
+
+        return data
 
     def create_update_system_build_webhook(self, system, delivery_url, secret):
         """
