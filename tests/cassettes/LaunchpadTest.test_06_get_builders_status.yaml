@@ -14,23 +14,18 @@ interactions:
     uri: https://api.launchpad.net/devel/builders?ws.op=getBuildQueueSizes
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAA/zXNQQqEMAwF0KuUrKU0sUnbXGVwURDRhQqdYWCQ3n0qxV34//FzwXcrH1BzQd5n
-        8e16kaPBAJk5/96DSepEebROxCPC1Kpc9nXp8oaoPignyxJd4Ef0LUy3GBVFiWxkCdHDVFt4nMfz
-        utY/YkIfa4cAAAA=
+      string: '{"virt": {}, "nonvirt": {}}'
     headers:
       Connection:
       - Keep-Alive
-      Content-Encoding:
-      - gzip
       Content-Length:
-      - '119'
+      - '27'
       Content-Security-Policy:
       - frame-ancestors 'self';
       Content-Type:
       - application/json
       Date:
-      - Mon, 18 May 2020 09:41:22 GMT
+      - Thu, 21 May 2020 09:21:25 GMT
       Keep-Alive:
       - timeout=60, max=100
       Server:
@@ -38,13 +33,313 @@ interactions:
       Strict-Transport-Security:
       - max-age=15552000
       Vary:
-      - Accept,Accept-Encoding
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
       - SAMEORIGIN
       X-Launchpad-Revision:
-      - 0385b538081bc4718df6fb844a3afc89729c94ce
+      - 1f7bc749b40714a4cc10f5e4d787118a78037035
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://api.launchpad.net/devel/builders?ws.op=getBuildersForQueue&ws.show=total_size&processor=%2F%2Bprocessors%2Famd64&virtualized=true
+  response:
+    body:
+      string: '99'
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '2'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 21 May 2020 09:21:25 GMT
+      Keep-Alive:
+      - timeout=60, max=99
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 1f7bc749b40714a4cc10f5e4d787118a78037035
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://api.launchpad.net/devel/builders?ws.op=getBuildersForQueue&ws.show=total_size&processor=%2F%2Bprocessors%2Farm64&virtualized=true
+  response:
+    body:
+      string: '85'
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '2'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 21 May 2020 09:21:25 GMT
+      Keep-Alive:
+      - timeout=60, max=98
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 1f7bc749b40714a4cc10f5e4d787118a78037035
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://api.launchpad.net/devel/builders?ws.op=getBuildersForQueue&ws.show=total_size&processor=%2F%2Bprocessors%2Farmhf&virtualized=true
+  response:
+    body:
+      string: '85'
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '2'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 21 May 2020 09:21:25 GMT
+      Keep-Alive:
+      - timeout=60, max=97
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 1f7bc749b40714a4cc10f5e4d787118a78037035
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://api.launchpad.net/devel/builders?ws.op=getBuildersForQueue&ws.show=total_size&processor=%2F%2Bprocessors%2Fi386&virtualized=true
+  response:
+    body:
+      string: '99'
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '2'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 21 May 2020 09:21:25 GMT
+      Keep-Alive:
+      - timeout=60, max=96
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 1f7bc749b40714a4cc10f5e4d787118a78037035
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://api.launchpad.net/devel/builders?ws.op=getBuildersForQueue&ws.show=total_size&processor=%2F%2Bprocessors%2Fppc64el&virtualized=true
+  response:
+    body:
+      string: '29'
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '2'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 21 May 2020 09:21:26 GMT
+      Keep-Alive:
+      - timeout=60, max=95
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 1f7bc749b40714a4cc10f5e4d787118a78037035
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://api.launchpad.net/devel/builders?ws.op=getBuildersForQueue&ws.show=total_size&processor=%2F%2Bprocessors%2Fs390x&virtualized=true
+  response:
+    body:
+      string: '20'
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '2'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 21 May 2020 09:21:26 GMT
+      Keep-Alive:
+      - timeout=60, max=94
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 1f7bc749b40714a4cc10f5e4d787118a78037035
       X-Lazr-Notifications:
       - '[]'
       X-Powered-By:

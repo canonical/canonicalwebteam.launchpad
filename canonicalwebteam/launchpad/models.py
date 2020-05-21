@@ -5,6 +5,8 @@ from hashlib import md5
 
 # Packages
 import gnupg
+from humanize import naturaldelta
+from pytimeparse.timeparse import timeparse
 
 
 class Launchpad:
@@ -44,10 +46,8 @@ class Launchpad:
     virtual_builders_architectures = [
         "amd64",
         "arm64",
-        "armel",
         "armhf",
         "i386",
-        "powerpc",
         "ppc64el",
         "s390x",
     ]
@@ -102,15 +102,31 @@ class Launchpad:
 
         data = {}
         for arch in self.virtual_builders_architectures:
+            # Get total builders
+            total_builders = self.request(
+                "https://api.launchpad.net/devel/builders",
+                params={
+                    "ws.op": "getBuildersForQueue",
+                    "ws.show": "total_size",
+                    "processor": f"/+processors/{arch}",
+                    "virtualized": "true",
+                },
+            ).json()
+
             data[arch] = {}
 
             # The API could not return an architecture if it doesn't have jobs
             if arch not in response["virt"]:
-                data[arch]["pending_builds"] = 0
+                data[arch]["pending_jobs"] = 0
+                data[arch]["total_jobs_duration"] = None
                 data[arch]["estimated_duration"] = None
             else:
-                data[arch]["pending_builds"] = response["virt"][arch][0]
-                data[arch]["estimated_duration"] = response["virt"][arch][1]
+                data[arch]["pending_jobs"] = response["virt"][arch][0]
+                data[arch]["total_jobs_duration"] = response["virt"][arch][1]
+                duration_seconds = timeparse(data[arch]["total_jobs_duration"])
+                data[arch]["estimated_duration"] = naturaldelta(
+                    duration_seconds / int(total_builders)
+                )
 
         return data
 

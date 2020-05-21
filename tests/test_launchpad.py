@@ -83,5 +83,6 @@ class LaunchpadTest(VCRTestCase):
         result = self.lp_for_snaps.get_builders_status()
 
         for architecture in result.values():
-            self.assertIn("pending_builds", architecture.keys())
+            self.assertIn("pending_jobs", architecture.keys())
+            self.assertIn("total_jobs_duration", architecture.keys())
             self.assertIn("estimated_duration", architecture.keys())
