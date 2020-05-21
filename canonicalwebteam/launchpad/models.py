@@ -204,6 +204,7 @@ class Launchpad:
             "subarch": arch_info["subarch"],
             "extra_snaps": snaps,
             "project": project,
+            "channel": "stable",
             "image_format": "ubuntu-image",
         }
 
