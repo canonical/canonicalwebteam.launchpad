@@ -24,3 +24,4 @@ v0.7.1, 2020-05-11 -- Fix method is_snap_building
 v0.7.2, 2020-05-15 -- Added get_builders_status method
 v0.7.3, 2020-05-15 -- Update get_builders_status response to obtain the estimated time per architecture
 v0.7.4, 2020-05-22 -- Always use stable channel of snaps for building core images
+v0.7.5, 2020-05-22 -- Fix methods get_snap and get_snap_build

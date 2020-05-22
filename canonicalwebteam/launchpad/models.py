@@ -257,7 +257,7 @@ class Launchpad:
 
         return self.request(
             f"https://api.launchpad.net/devel/~{self.username}/+snap/{name}"
-        )
+        ).json()
 
     def create_snap(self, snap_name, git_url, macaroon):
         """
@@ -377,7 +377,7 @@ class Launchpad:
         return self.request(
             "https://api.launchpad.net/devel/"
             f"~{self.username}/+snap/{lp_snap['name']}/+build/{build_id}"
-        )
+        ).json()
 
     def get_snap_build_log(self, snap_name, build_id):
         """
