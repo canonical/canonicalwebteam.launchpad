@@ -356,15 +356,23 @@ class Launchpad:
 
         return True
 
-    def get_snap_builds(self, snap_name):
+    def get_snap_builds(self, snap_name, pending_builds=True):
         """
         Return list of builds from a Snap from the Launchpad API
         """
         lp_snap = self.get_snap_by_store_name(snap_name)
 
-        # Remove first part of the URL
-        builds = self.get_collection_entries(lp_snap["builds_collection_link"])
+        builds = self.get_collection_entries(
+            lp_snap["completed_builds_collection_link"]
+        )
 
+        # Include pending builds
+        if pending_builds:
+            builds += self.get_collection_entries(
+                lp_snap["pending_builds_collection_link"]
+            )
+
+        # All of them are ordered by descending creation date
         return sorted(builds, key=lambda x: x["datecreated"], reverse=True)
 
     def get_snap_build(self, snap_name, build_id):
