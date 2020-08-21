@@ -177,15 +177,20 @@ class Launchpad:
             },
         )
 
-    def build_image(self, board, system, snaps, author_info, gpg_passphrase):
+    def build_image(self, board, system, snaps, author_info, gpg_passphrase, arch=None):
         """
         `board` is something like "raspberrypi3",
         `system` is something like "classic6418.04"
+        `arch` is something like "armhf"
         """
 
         system_year = re.match(r"^[^\d]+(?:64)?(\d{2})(\.\d{2})?$", system)[1]
         codename = self.system_codenames[system_year]
         arch_info = self.board_architectures[board][system]
+
+        if arch:
+            arch_info["arch"] = arch
+
         project = "ubuntu-core"
 
         if system.startswith("classic"):
