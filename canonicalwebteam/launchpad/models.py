@@ -177,7 +177,9 @@ class Launchpad:
             },
         )
 
-    def build_image(self, board, system, snaps, author_info, gpg_passphrase, arch=None):
+    def build_image(
+        self, board, system, snaps, author_info, gpg_passphrase, arch=None
+    ):
         """
         `board` is something like "raspberrypi3",
         `system` is something like "classic6418.04"
