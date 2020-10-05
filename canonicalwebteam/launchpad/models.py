@@ -112,6 +112,7 @@ class Launchpad:
                     "virtualized": "true",
                 },
             ).json()
+            total_builders = int(total_builders)
 
             data[arch] = {}
 
@@ -124,9 +125,13 @@ class Launchpad:
                 data[arch]["pending_jobs"] = response["virt"][arch][0]
                 data[arch]["total_jobs_duration"] = response["virt"][arch][1]
                 duration_seconds = timeparse(data[arch]["total_jobs_duration"])
-                data[arch]["estimated_duration"] = naturaldelta(
-                    duration_seconds / int(total_builders)
-                )
+
+                if total_builders:
+                    data[arch]["estimated_duration"] = naturaldelta(
+                        duration_seconds / total_builders
+                    )
+                else:
+                    data[arch]["estimated_duration"] = None
 
         return data
 
