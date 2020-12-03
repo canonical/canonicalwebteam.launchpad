@@ -1,7 +1,6 @@
 change-template: "$TITLE (#$NUMBER)"
 exclude-labels:
   - 'skip-changelog'
-tag-template: 'v$NEXT_PATCH_VERSION'
 template: |
   ## Changes
   $CHANGES
