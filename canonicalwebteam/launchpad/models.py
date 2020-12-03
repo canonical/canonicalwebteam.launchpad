@@ -1,12 +1,18 @@
 # Standard library
 import json
 import re
+from os import getenv
 from hashlib import md5
 
 # Packages
 import gnupg
 from humanize import naturaldelta
 from pytimeparse.timeparse import timeparse
+
+
+LAUNCHPAD_API_URL = getenv(
+    "LAUNCHPAD_API_URL", "https://api.launchpad.net/devel/"
+)
 
 
 class Launchpad:
@@ -96,7 +102,7 @@ class Launchpad:
         Return virtual builders status in Launchpad
         """
         response = self.request(
-            "https://api.launchpad.net/devel/builders",
+            f"{LAUNCHPAD_API_URL}builders",
             params={"ws.op": "getBuildQueueSizes"},
         ).json()
 
@@ -104,7 +110,7 @@ class Launchpad:
         for arch in self.virtual_builders_architectures:
             # Get total builders
             total_builders = self.request(
-                "https://api.launchpad.net/devel/builders",
+                f"{LAUNCHPAD_API_URL}builders",
                 params={
                     "ws.op": "getBuildersForQueue",
                     "ws.show": "total_size",
@@ -149,8 +155,7 @@ class Launchpad:
             project = "ubuntu-cpc"
 
         webhooks = self.get_collection_entries(
-            "https://api.launchpad.net/devel/"
-            f"~{self.username}/"
+            f"{LAUNCHPAD_API_URL}~{self.username}/"
             f"+livefs/ubuntu/{codename}/{project}/webhooks"
         )
 
@@ -169,8 +174,7 @@ class Launchpad:
         # Else, create it
         return self.request(
             (
-                "https://api.launchpad.net/devel/"
-                f"~{self.username}/"
+                f"{LAUNCHPAD_API_URL}~{self.username}/"
                 f"+livefs/ubuntu/{codename}/{project}"
             ),
             method="post",
@@ -233,8 +237,7 @@ class Launchpad:
 
         return self.request(
             (
-                "https://api.launchpad.net/devel/"
-                f"~{self.username}/"
+                f"{LAUNCHPAD_API_URL}~{self.username}/"
                 f"+livefs/ubuntu/{codename}/{project}"
             ),
             method="post",
@@ -247,7 +250,7 @@ class Launchpad:
         """
 
         snaps = self.get_collection_entries(
-            "https://api.launchpad.net/devel/+snaps",
+            f"{LAUNCHPAD_API_URL}+snaps",
             params={
                 "ws.op": "findByStoreName",
                 "owner": f"/~{self.username}",
@@ -268,7 +271,7 @@ class Launchpad:
         """
 
         return self.request(
-            f"https://api.launchpad.net/devel/~{self.username}/+snap/{name}"
+            f"{LAUNCHPAD_API_URL}~{self.username}/+snap/{name}"
         ).json()
 
     def create_snap(self, snap_name, git_url, macaroon):
@@ -301,18 +304,13 @@ class Launchpad:
             "auto_build": "false",
         }
 
-        self.request(
-            "https://api.launchpad.net/devel/+snaps", method="post", data=data
-        )
+        self.request(f"{LAUNCHPAD_API_URL}+snaps", method="post", data=data)
 
         # Authorize uploads to the store from this user
         data = {"ws.op": "completeAuthorization", "root_macaroon": macaroon}
 
         self.request(
-            (
-                "https://api.launchpad.net/devel/"
-                f"~{self.username}/+snap/{lp_snap_name}/"
-            ),
+            f"{LAUNCHPAD_API_URL}~{self.username}/+snap/{lp_snap_name}/",
             method="post",
             data=data,
         )
@@ -395,8 +393,8 @@ class Launchpad:
         lp_snap = self.get_snap_by_store_name(snap_name)
 
         return self.request(
-            "https://api.launchpad.net/devel/"
-            f"~{self.username}/+snap/{lp_snap['name']}/+build/{build_id}"
+            f"{LAUNCHPAD_API_URL}~{self.username}"
+            f"/+snap/{lp_snap['name']}/+build/{build_id}"
         ).json()
 
     def get_snap_build_log(self, snap_name, build_id):
