@@ -7,23 +7,23 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.22.0]
     method: GET
-    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.snapcraft.io&store_name=toto
+    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.staging.snapcraft.io&store_name=toto
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA8VWy27bMBD8lYI9urYoSrIt3wq0QD8gPTWBsCJXNhGaZEnKgRuk315SieJHA9Ro
-        gOQkidLO7swuR7wnwQRQjZe/kKw+5J8+EB/AhXhP4z3q4CT6+PTjPr4wDhu+Aa1RDWsExRrJTfxQ
-        QMBGgQ/N1gjZSRTxPWE0r6eUTVl+ldNVXq5YNVsUrKB0QumKUjKkS6i9VQZSTHA9xtW1DI3DrlFS
-        3yakTQjWr7IMrJwp6DXfWBAzjSETuEOVTeLH2bevn78kSOvkLtYT4zpQPsHdYfsX1CnM77aXSsy8
-        BssddGEmTTZJT1lZMyw4F7mAuha8XjI2x3JZiKrimM/blLF1ELHGFLpXKi5CH0wzwB54HdaOhXwK
-        sM5w9N4433CjFPIgjb5Ygv9nkB0Sk2ftrfEytmZ/RoqDfmpWE5kMzTuwc/izl7GbO+lCDyrO1BF1
-        i1pIvX5k/+YMT5KT006A4xu5w4vr6Ntehz6bPMVF+eQW3H4YhAHQm95xbOJGakGpozl8F+4Hzicq
-        NKlb6MO7tuK5iMEKUF2+41+3YYX0wcX5xWRvZyMu0HMnbdLjaDMrZe4aqQO6WMOpUVkIm1Ty6D+p
-        9AYDrNPiNVm0ABx4V5bFkiOjrKqRQ0kF7XheUhCtKHFZF9PFXAismGDzMmd5ldNuWbSMCRQd77q6
-        qoqym3c1uybk0dM2xty+dfvGtAfvPhXx31ad8tj99DEsy+cveE7v1DFUfLvp2xk32yy0MrLN4l/L
-        TBNQCu5AKhTvO9Uv1pCK07BNDkkumcpHPceIxJEMrjr6yd5eblIfR3UcrtOwgw6v0SEhmTuN7rUg
-        w0mBO4yX8YywTGcEurzK8xWtV+V8xhZ1TevDGSE23ioMo75v3dvz9Ge/D2v47WAJ5LtN7Dx5uHn4
-        AxDPon1ZCQAA
+        H4sIAAAAAAAACs1WXW/bIBT9KxV7zGJjbCdx3iZt0n5A97RWFobrBJUA5SNVVnW/feA0zccqLdIi
+        pU+2wfdwz7mXA8/Ia09l68QvQPOb4vMNcp5aH99xfAflrQAXv34+xwltoWVLqhTIYQwBXwC6jz9y
+        6qGV1Pl2pbnoBfA4jwgumjEmY1LcFnheVHNSZ9OSlBiPMJ5jjIblEmowUtMU422AOLoQvrXQt1Ko
+        h4S09N64eZ5TIzJJg2JLQ3mmwOcc1iDzUfw5//7ty9cEaaxYx3xiXE+lS3BP0P0FdQzzuwtC8iyS
+        Xwi1yJyihlna+0zofJS+8qohUDLGC06bhrNmRsgEqlnJ65pBMenSyp2lEXO3lApSxkEavG4H+D2/
+        /dihoK8BxmoGzmnrWqalBOaFVmdL8f9M8n0C6K0WRjsRS7U5Iceoei1eGxkNxdyztPAYRKzuWlgf
+        qIw9diCBAcVjglsVrsb0KAl0XBlq2VKs4ex8QheUD/noNS7KKFbUbobGGACdDpZBGzdYR6U86M+r
+        arDnfqRGrPljAOc/RGnekhksA+T5znCZjc2F8zb2NyQ7PNkCHByzwiR9Dja9lPqpFcqDjbkcG5uh
+        fplS3/lVotBCTDAN3qFpRymjrK+qcsaAYFI3wGiFOe5ZUWHKO17BrCnH0wnnUBNOJlVBirrA/azs
+        COHAe9b3TV2XVT/pG3KH0NYDl1o/XKucu+X3nn8s5r8tPq1jNuNtWF5M3vGmYOUhVJxdhi5jepX7
+        TkTWeTzt9DgBpeCeCgn8Y3T7u7mkJBVdJUdF53TpVtddROKaRi3sfGdjzjezTzuVLCxS81PlL6FH
+        QtRPCuylwHi6eTAL8bG7c8zSnQPPbotijpt5NcnItGlws79zxIYwEmLAdQ+f0zROjh+j2cNgHeiH
+        SSwderl/+QOPgXdYsQkAAA==
     headers:
       Connection: [Keep-Alive]
       Content-Encoding: [gzip]
@@ -52,7 +52,7 @@ interactions:
       Content-Type: [application/x-www-form-urlencoded]
       User-Agent: [python-requests/2.22.0]
     method: POST
-    uri: https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
+    uri: https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
   response:
     body: {string: ''}
     headers:
@@ -62,7 +62,7 @@ interactions:
       Content-Type: [text/plain;charset=utf-8]
       Date: ['Fri, 21 Feb 2020 09:27:56 GMT']
       Keep-Alive: ['timeout=60, max=99']
-      Location: ['https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843220']
+      Location: ['https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843220']
       Server: [zope.server.http (HTTP)]
       Strict-Transport-Security: [max-age=15552000]
       Vary: [Accept]
@@ -84,7 +84,7 @@ interactions:
       Content-Type: [application/x-www-form-urlencoded]
       User-Agent: [python-requests/2.22.0]
     method: POST
-    uri: https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
+    uri: https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
   response:
     body: {string: ''}
     headers:
@@ -94,7 +94,7 @@ interactions:
       Content-Type: [text/plain;charset=utf-8]
       Date: ['Fri, 21 Feb 2020 09:27:56 GMT']
       Keep-Alive: ['timeout=60, max=98']
-      Location: ['https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843221']
+      Location: ['https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843221']
       Server: [zope.server.http (HTTP)]
       Strict-Transport-Security: [max-age=15552000]
       Vary: [Accept]
@@ -116,7 +116,7 @@ interactions:
       Content-Type: [application/x-www-form-urlencoded]
       User-Agent: [python-requests/2.22.0]
     method: POST
-    uri: https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
+    uri: https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
   response:
     body: {string: ''}
     headers:
@@ -126,7 +126,7 @@ interactions:
       Content-Type: [text/plain;charset=utf-8]
       Date: ['Fri, 21 Feb 2020 09:27:57 GMT']
       Keep-Alive: ['timeout=60, max=97']
-      Location: ['https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843222']
+      Location: ['https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843222']
       Server: [zope.server.http (HTTP)]
       Strict-Transport-Security: [max-age=15552000]
       Vary: [Accept]
@@ -148,7 +148,7 @@ interactions:
       Content-Type: [application/x-www-form-urlencoded]
       User-Agent: [python-requests/2.22.0]
     method: POST
-    uri: https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
+    uri: https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
   response:
     body: {string: ''}
     headers:
@@ -158,7 +158,7 @@ interactions:
       Content-Type: [text/plain;charset=utf-8]
       Date: ['Fri, 21 Feb 2020 09:27:57 GMT']
       Keep-Alive: ['timeout=60, max=96']
-      Location: ['https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843223']
+      Location: ['https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843223']
       Server: [zope.server.http (HTTP)]
       Strict-Transport-Security: [max-age=15552000]
       Vary: [Accept]
@@ -180,7 +180,7 @@ interactions:
       Content-Type: [application/x-www-form-urlencoded]
       User-Agent: [python-requests/2.22.0]
     method: POST
-    uri: https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
+    uri: https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
   response:
     body: {string: ''}
     headers:
@@ -190,7 +190,7 @@ interactions:
       Content-Type: [text/plain;charset=utf-8]
       Date: ['Fri, 21 Feb 2020 09:27:57 GMT']
       Keep-Alive: ['timeout=60, max=95']
-      Location: ['https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843224']
+      Location: ['https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843224']
       Server: [zope.server.http (HTTP)]
       Strict-Transport-Security: [max-age=15552000]
       Vary: [Accept]
@@ -212,7 +212,7 @@ interactions:
       Content-Type: [application/x-www-form-urlencoded]
       User-Agent: [python-requests/2.22.0]
     method: POST
-    uri: https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
+    uri: https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
   response:
     body: {string: ''}
     headers:
@@ -222,7 +222,7 @@ interactions:
       Content-Type: [text/plain;charset=utf-8]
       Date: ['Fri, 21 Feb 2020 09:27:58 GMT']
       Keep-Alive: ['timeout=60, max=94']
-      Location: ['https://api.launchpad.net/devel/~build.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843225']
+      Location: ['https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843225']
       Server: [zope.server.http (HTTP)]
       Strict-Transport-Security: [max-age=15552000]
       Vary: [Accept]

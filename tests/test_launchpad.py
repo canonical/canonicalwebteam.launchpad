@@ -19,7 +19,7 @@ class LaunchpadTest(VCRTestCase):
 
     def setUp(self):
         self.lp_for_snaps = Launchpad(
-            username="build.snapcraft.io",
+            username="build.staging.snapcraft.io",
             token=getenv("SNAP_BUILDS_TOKEN", "secret"),
             secret=getenv("SNAP_BUILDS_SECRET", "secret"),
             session=requests.Session(),
@@ -86,3 +86,10 @@ class LaunchpadTest(VCRTestCase):
             self.assertIn("pending_jobs", architecture.keys())
             self.assertIn("total_jobs_duration", architecture.keys())
             self.assertIn("estimated_duration", architecture.keys())
+
+    def test_07_get_snap_build_status(self):
+        result = self.lp_for_snaps.get_snap_build_status("toto")
+
+        for architecture in result.values():
+            self.assertIn("buildstate", architecture.keys())
+            self.assertIn("store_upload_status", architecture.keys())

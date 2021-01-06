@@ -11,22 +11,23 @@ interactions:
       User-Agent:
       - python-requests/2.23.0
     method: GET
-    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.snapcraft.io&store_name=new-test-snap
+    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.staging.snapcraft.io&store_name=new-test-snap
   response:
     body:
       string: !!binary |
-        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
+        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
+        CQAA
     headers:
       Connection:
       - Keep-Alive
@@ -77,7 +78,7 @@ interactions:
       User-Agent:
       - python-requests/2.23.0
     method: DELETE
-    uri: https://api.launchpad.net/devel/~build.snapcraft.io/+snap/57872c9265e7749eb552312d0ac74b79
+    uri: https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/57872c9265e7749eb552312d0ac74b79
   response:
     body:
       string: 'null'
