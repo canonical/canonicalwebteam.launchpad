@@ -385,6 +385,33 @@ class Launchpad:
         # All of them are ordered by descending creation date
         return sorted(builds, key=lambda x: x["datecreated"], reverse=True)
 
+    def get_snap_build_status(self, snap_name):
+        """
+        Return build statuses for each arch of the snap
+        """
+        lp_snap = self.get_snap_by_store_name(snap_name)
+        arch_builds = {}
+
+        if lp_snap:
+            # We're insterested in the last builds for each architecture
+            builds = self.get_snap_builds(
+                snap_name,
+                pending_builds=True,
+            )[: len(self.virtual_builders_architectures)]
+
+            for arch in self.virtual_builders_architectures:
+                for build in builds:
+                    # Check if the snap build this arch and
+                    # the status it's not already set from a recent built
+                    if build["arch_tag"] == arch and arch not in arch_builds:
+                        arch_builds[arch] = {}
+                        arch_builds[arch]["buildstate"] = build["buildstate"]
+                        arch_builds[arch]["store_upload_status"] = build[
+                            "store_upload_status"
+                        ]
+
+        return arch_builds
+
     def get_snap_build(self, snap_name, build_id):
         """
         Return a Snap Build from the Launchpad API

@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.24.0
+    method: GET
+    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.staging.snapcraft.io&store_name=toto
+  response:
+    body:
+      string: '{"total_size": 0, "start": 0, "entries": []}'
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '44'
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 06 Jan 2021 17:24:59 GMT
+      Keep-Alive:
+      - timeout=60, max=100
+      Server:
+      - zope.server.http (HTTP)
+      Strict-Transport-Security:
+      - max-age=15552000
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Launchpad-Revision:
+      - 34b3ffd45c9543b7f7aa5aa313925241e9e7ca3f
+      X-Lazr-Notifications:
+      - '[]'
+      X-Powered-By:
+      - Zope (www.zope.org), Python (www.python.org)
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: Ok
+version: 1
