@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - python-requests/2.23.0
     method: GET
-    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.staging.snapcraft.io&store_name=new-test-snap
+    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.staging.snapcraft.io&store_name="new-test-snap"
   response:
     body:
       string: !!binary |

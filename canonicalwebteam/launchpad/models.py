@@ -254,7 +254,7 @@ class Launchpad:
             params={
                 "ws.op": "findByStoreName",
                 "owner": f"/~{self.username}",
-                "store_name": snap_name,
+                "store_name": f'"{snap_name}"',
             },
         )
 
