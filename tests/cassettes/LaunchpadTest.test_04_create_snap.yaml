@@ -1,6 +1,6 @@
 interactions:
 - request:
-    body: ws.op=new&owner=%2F%7Ebuild.staging.snapcraft.io&name=57872c9265e7749eb552312d0ac74b79&store_name=new-test-snap&git_repository_url=https%3A%2F%2Fgithub.com%2Fbuild-staging-snapcraft-io%2Ftest1&git_path=HEAD&auto_build=false&auto_build_archive=%2Fubuntu%2F%2Barchive%2Fprimary&auto_build_pocket=Updates&processors=%2F%2Bprocessors%2Famd64&processors=%2F%2Bprocessors%2Farm64&processors=%2F%2Bprocessors%2Farmhf&processors=%2F%2Bprocessors%2Fi386&processors=%2F%2Bprocessors%2Fppc64el&processors=%2F%2Bprocessors%2Fs390x&store_series=%2F%2Bsnappy-series%2F16
+    body: ws.op=new&owner=%2F%7Ebuild.staging.snapcraft.io&name=57872c9265e7749eb552312d0ac74b79&store_name="new-test-snap"&git_repository_url=https%3A%2F%2Fgithub.com%2Fbuild-staging-snapcraft-io%2Ftest1&git_path=HEAD&auto_build=false&auto_build_archive=%2Fubuntu%2F%2Barchive%2Fprimary&auto_build_pocket=Updates&processors=%2F%2Bprocessors%2Famd64&processors=%2F%2Bprocessors%2Farm64&processors=%2F%2Bprocessors%2Farmhf&processors=%2F%2Bprocessors%2Fi386&processors=%2F%2Bprocessors%2Fppc64el&processors=%2F%2Bprocessors%2Fs390x&store_series=%2F%2Bsnappy-series%2F16
     headers:
       Accept:
       - application/json
@@ -127,7 +127,7 @@ interactions:
       User-Agent:
       - storefront (82e80f8ae4234617b3fd3caf6fc2ca22d24774d8;devel)
     method: GET
-    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.staging.snapcraft.io&store_name=new-test-snap
+    uri: https://api.launchpad.net/devel/+snaps?ws.op=findByStoreName&owner=%2F~build.staging.snapcraft.io&store_name="new-test-snap"
   response:
     body:
       string: !!binary |
