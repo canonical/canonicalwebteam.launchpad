@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="canonicalwebteam.launchpad",
-    version="0.8.1",
+    version="0.8.2",
     author="Canonical webteam",
     author_email="webteam@canonical.com",
     url=(
@@ -21,7 +21,7 @@ setup(
     install_requires=[
         "python-gnupg>=0.4.6",
         "pytimeparse==1.1.8",
-        "humanize==2.4.0",
+        "humanize==3.2.0",
     ],
     tests_require=["vcrpy-unittest"],
 )
