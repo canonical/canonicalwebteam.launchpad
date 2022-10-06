@@ -362,9 +362,16 @@ class Launchpad:
         if channels:
             data["channels"] = channels
 
-        self.request(lp_snap["self_link"], method="post", data=data)
+        response = self.request(lp_snap["self_link"], method="post", data=data)
 
-        return True
+        return response.headers["Location"].split("/")[-1]
+
+    def get_snap_build_request(self, snap_name, build_id):
+        lp_snap = self.get_snap_by_store_name(snap_name)
+
+        url = f"{lp_snap['self_link']}/+build-request/{build_id}"
+
+        return self.request(url).json()
 
     def get_snap_builds(self, snap_name, pending_builds=True):
         """
