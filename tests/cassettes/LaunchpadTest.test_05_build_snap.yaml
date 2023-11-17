@@ -203,6 +203,38 @@ interactions:
       X-Xss-Protection: [1; mode=block]
     status: {code: 201, message: Created}
 - request:
+    body: ws.op=requestBuild&channels=snapcraft%2Capt&archive=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2F%2Barchive%2Fprimary&pocket=Updates&distro_arch_series=%2Fubuntu%2Fxenial%2Friscv64
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['186']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.22.0]
+    method: POST
+    uri: https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b
+  response:
+    body: {string: ''}
+    headers:
+      Connection: [Keep-Alive]
+      Content-Length: ['0']
+      Content-Security-Policy: [frame-ancestors 'self';]
+      Content-Type: [text/plain;charset=utf-8]
+      Date: ['Fri, 21 Feb 2020 09:27:57 GMT']
+      Keep-Alive: ['timeout=60, max=94']
+      Location: ['https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843225']
+      Server: [zope.server.http (HTTP)]
+      Strict-Transport-Security: [max-age=15552000]
+      Vary: [Accept]
+      X-Content-Type-Options: [nosniff]
+      X-Content-Type-Warning: [guessed from content]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Launchpad-Revision: [19413b719a8df7423ab1390528edadce9e0e4aca]
+      X-Lazr-Notifications: ['[]']
+      X-Powered-By: ['Zope (www.zope.org), Python (www.python.org)']
+      X-Xss-Protection: [1; mode=block]
+    status: {code: 201, message: Created}
+- request:
     body: ws.op=requestBuild&channels=snapcraft%2Capt&archive=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2F%2Barchive%2Fprimary&pocket=Updates&distro_arch_series=%2Fubuntu%2Fxenial%2Fs390x
     headers:
       Accept: [application/json]
@@ -221,8 +253,8 @@ interactions:
       Content-Security-Policy: [frame-ancestors 'self';]
       Content-Type: [text/plain;charset=utf-8]
       Date: ['Fri, 21 Feb 2020 09:27:58 GMT']
-      Keep-Alive: ['timeout=60, max=94']
-      Location: ['https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843225']
+      Keep-Alive: ['timeout=60, max=93']
+      Location: ['https://api.launchpad.net/devel/~build.staging.snapcraft.io/+snap/492e3ccd1da99dc98226e483d55ce16b/+build/843226']
       Server: [zope.server.http (HTTP)]
       Strict-Transport-Security: [max-age=15552000]
       Vary: [Accept]
