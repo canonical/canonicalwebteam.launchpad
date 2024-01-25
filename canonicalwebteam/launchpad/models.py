@@ -55,6 +55,7 @@ class Launchpad:
         "armhf",
         "i386",
         "ppc64el",
+        "riscv64",
         "s390x",
     ]
 
@@ -296,6 +297,7 @@ class Launchpad:
                 "/+processors/armhf",
                 "/+processors/i386",
                 "/+processors/ppc64el",
+                "/+processors/riscv64",
                 "/+processors/s390x",
             ],
             "store_series": "/+snappy-series/16",
