@@ -21,7 +21,7 @@ setup(
     install_requires=[
         "python-gnupg>=0.4.6",
         "pytimeparse==1.1.8",
-        "humanize==3.13.1",
+        "humanize==3.14.0",
     ],
     tests_require=["vcrpy-unittest"],
 )
