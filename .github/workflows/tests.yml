@@ -45,12 +45,17 @@ jobs:
 
     - name: Install system dependencies
       run: |
-        sudo apt update && sudo apt install -y --no-install-recommends python3-setuptools
+        sudo apt update && sudo apt install -y --no-install-recommends python3-setuptools python3-pip
         pip3 install --upgrade setuptools
         pip3 install wheel
 
+    - name: Install package and test dependencies
+      run: |
+        pip3 install -e .
+        pip3 install vcrpy-unittest
+
     - name: Test Python
-      run: python3 setup.py test
+      run: python3 -m unittest discover -s tests -p "test_*.py"
 
   check-inclusive-naming:
     runs-on: ubuntu-latest
