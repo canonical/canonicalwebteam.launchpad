@@ -9,7 +9,6 @@ import gnupg
 from humanize import naturaldelta
 from pytimeparse.timeparse import timeparse
 
-
 LAUNCHPAD_API_URL = getenv(
     "LAUNCHPAD_API_URL", "https://api.launchpad.net/devel/"
 )
