@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68.0.0,<69.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "canonicalwebteam.launchpad"
+version = "0.9.0"
+description = "Trigger builds of snaps and ubuntu images through the launchpad API."
+readme = "README.md"
+authors = [
+    {name = "Canonical webteam", email = "webteam@canonical.com"}
+]
+requires-python = ">=3.8"
+dependencies = [
+    "python-gnupg>=0.4.6",
+    "pytimeparse==1.1.8",
+    "humanize==4.15.0",
+]
+classifiers = [
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+]
+
+[project.urls]
+Homepage = "https://github.com/canonical-web-and-design/canonicalwebteam.launchpad"
+
+[tool.setuptools]
+packages = ["canonicalwebteam", "canonicalwebteam.launchpad", "tests", "tests.fixtures"]
+zip-safe = false
+license-files = []
