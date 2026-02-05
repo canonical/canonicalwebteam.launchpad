@@ -24,6 +24,5 @@ classifiers = [
 Homepage = "https://github.com/canonical-web-and-design/canonicalwebteam.launchpad"
 
 [tool.setuptools]
-packages = ["canonicalwebteam", "canonicalwebteam.launchpad", "tests", "tests.fixtures"]
+packages = ["canonicalwebteam", "canonicalwebteam.launchpad"]
 zip-safe = false
-license-files = []
