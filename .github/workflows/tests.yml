@@ -13,6 +13,7 @@ jobs:
       run: |
         sudo apt update && sudo apt install -y --no-install-recommends python3-pip
         pip3 install --upgrade pip
+        # setuptools <69 required for metadata compatibility with twine
         pip3 install 'setuptools<69' wheel twine
 
     - name: Build package
