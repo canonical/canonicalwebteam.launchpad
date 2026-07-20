@@ -1,5 +1,6 @@
 # Standard library
 from os import getenv
+from unittest.mock import patch
 
 # Packages
 import requests
@@ -78,6 +79,74 @@ class LaunchpadTest(VCRTestCase):
     def test_05_delete_snap(self):
         result = self.lp_for_snaps.delete_snap("new-test-snap")
         self.assertEqual(True, result)
+
+    def test_06_create_snap_sends_discharge_macaroon(self):
+        """
+        When a discharge macaroon is provided, it must be included in
+        the completeAuthorization request, otherwise Launchpad accepts
+        the (SSO-caveated) root macaroon but can never actually use it
+        to upload builds to the store, leaving builds stuck as
+        "Unscheduled" ("Won't release").
+        """
+        with patch.object(self.lp_for_snaps, "request") as mock_request:
+            self.lp_for_snaps.create_snap(
+                "new-test-snap",
+                "https://github.com/build-staging-snapcraft-io/test1",
+                "root-macaroon",
+                discharge_macaroon="discharge-macaroon",
+            )
+
+            _, complete_auth_kwargs = mock_request.call_args_list[1]
+            self.assertEqual(
+                complete_auth_kwargs["data"]["ws.op"],
+                "completeAuthorization",
+            )
+            self.assertEqual(
+                complete_auth_kwargs["data"]["root_macaroon"],
+                "root-macaroon",
+            )
+            self.assertEqual(
+                complete_auth_kwargs["data"]["discharge_macaroon"],
+                "discharge-macaroon",
+            )
+
+    def test_06_create_snap_without_discharge_macaroon(self):
+        """
+        Backwards compatibility: when no discharge macaroon is passed,
+        the request should be identical to before this was added.
+        """
+        with patch.object(self.lp_for_snaps, "request") as mock_request:
+            self.lp_for_snaps.create_snap(
+                "new-test-snap",
+                "https://github.com/build-staging-snapcraft-io/test1",
+                "root-macaroon",
+            )
+
+            _, complete_auth_kwargs = mock_request.call_args_list[1]
+            self.assertNotIn(
+                "discharge_macaroon", complete_auth_kwargs["data"]
+            )
+
+    def test_06_complete_snap_authorization_can_reauthorize(self):
+        """
+        Existing (already created) snaps can be re-authorized directly,
+        without going through create_snap again, so that snaps whose
+        authorization was never completed with a discharge macaroon can
+        be repaired.
+        """
+        with patch.object(self.lp_for_snaps, "request") as mock_request:
+            result = self.lp_for_snaps.complete_snap_authorization(
+                "some-lp-snap-name",
+                "root-macaroon",
+                discharge_macaroon="discharge-macaroon",
+            )
+
+            self.assertTrue(result)
+            mock_request.assert_called_once()
+            _, kwargs = mock_request.call_args
+            self.assertEqual(
+                kwargs["data"]["discharge_macaroon"], "discharge-macaroon"
+            )
 
     def test_06_get_builders_status(self):
         result = self.lp_for_snaps.get_builders_status()

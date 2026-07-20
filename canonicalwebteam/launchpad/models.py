@@ -275,9 +275,22 @@ class Launchpad:
             f"{LAUNCHPAD_API_URL}~{self.username}/+snap/{name}"
         ).json()
 
-    def create_snap(self, snap_name, git_url, macaroon):
+    def create_snap(
+        self, snap_name, git_url, macaroon, discharge_macaroon=None
+    ):
         """
         Create an ISnap in Launchpad
+
+        `macaroon` is the (unbound) root macaroon obtained from the
+        store's ACL endpoint for the `package_upload` permission.
+
+        If that root macaroon carries a third-party (SSO) caveat, it
+        can't be used for uploads until that caveat has been
+        discharged. In that case, callers must also pass the
+        corresponding `discharge_macaroon`, otherwise Launchpad will
+        silently accept the authorization but every subsequent build
+        will be stuck as "Unscheduled"/won't release, since it never
+        has a usable macaroon to upload with.
         """
 
         lp_snap_name = md5(git_url.encode("UTF-8")).hexdigest()
@@ -308,8 +321,27 @@ class Launchpad:
 
         self.request(f"{LAUNCHPAD_API_URL}+snaps", method="post", data=data)
 
-        # Authorize uploads to the store from this user
+        self.complete_snap_authorization(
+            lp_snap_name, macaroon, discharge_macaroon=discharge_macaroon
+        )
+
+        return True
+
+    def complete_snap_authorization(
+        self, lp_snap_name, macaroon, discharge_macaroon=None
+    ):
+        """
+        Authorize uploads to the store for an existing ISnap.
+
+        This can be used both when creating a snap and to re-authorize
+        (refresh) an existing one whose authorization has gone stale
+        or was never completed with a discharge macaroon.
+        """
+
         data = {"ws.op": "completeAuthorization", "root_macaroon": macaroon}
+
+        if discharge_macaroon:
+            data["discharge_macaroon"] = discharge_macaroon
 
         self.request(
             f"{LAUNCHPAD_API_URL}~{self.username}/+snap/{lp_snap_name}/",
