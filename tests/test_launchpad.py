@@ -16,7 +16,10 @@ class LaunchpadTest(VCRTestCase):
         This removes the authorization header
         from VCR so we don't record auth parameters
         """
-        return {"filter_headers": ["Authorization"]}
+        return {
+            "filter_headers": ["Authorization"],
+            "decode_compressed_response": True,
+        }
 
     def setUp(self):
         self.lp_for_snaps = Launchpad(
