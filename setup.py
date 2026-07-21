@@ -12,7 +12,7 @@ setup(
         "canonicalwebteam.launchpad"
     ),
     description=(
-        "Trigger builds of snaps and ubuntu imagesthrough the launchpad API."
+        "Trigger builds of snaps and ubuntu images through the launchpad API."
     ),
     packages=find_packages(),
     long_description=open("README.md").read(),
