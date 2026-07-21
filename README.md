@@ -26,6 +26,22 @@ snap_builder.create_snap(snap_name, git_repo)
 new_snap = snap_builder.get_snap_by_store_name("new-test-snap")
 ```
 
+`create_snap` authorizes store uploads using a root macaroon (typically obtained from the store's `package_upload` ACL endpoint). If that macaroon carries a third-party (SSO) caveat, Launchpad needs the matching `discharge_macaroon` as well, otherwise it will accept the authorization but never actually be able to upload builds — leaving every build stuck as "Unscheduled" ("Won't release") with no error surfaced:
+
+``` python3
+snap_builder.create_snap(
+    snap_name, git_repo, macaroon, discharge_macaroon=discharge_macaroon
+)
+```
+
+Snaps that were created before a discharge macaroon was available can be repaired without recreating them, using `complete_snap_authorization`:
+
+``` python3
+snap_builder.complete_snap_authorization(
+    lp_snap_name, macaroon, discharge_macaroon=discharge_macaroon
+)
+```
+
 ### ImageBuilder
 
 ``` python3
