@@ -76,11 +76,11 @@ class LaunchpadTest(VCRTestCase):
         result = self.lp_for_snaps.build_snap("toto")
         self.assertEqual("843220", result)
 
-    def test_05_delete_snap(self):
+    def test_06_delete_snap(self):
         result = self.lp_for_snaps.delete_snap("new-test-snap")
         self.assertEqual(True, result)
 
-    def test_06_create_snap_sends_discharge_macaroon(self):
+    def test_07_create_snap_sends_discharge_macaroon(self):
         """
         When a discharge macaroon is provided, it must be included in
         the completeAuthorization request, otherwise Launchpad accepts
@@ -110,7 +110,7 @@ class LaunchpadTest(VCRTestCase):
                 "discharge-macaroon",
             )
 
-    def test_06_create_snap_without_discharge_macaroon(self):
+    def test_08_create_snap_without_discharge_macaroon(self):
         """
         Backwards compatibility: when no discharge macaroon is passed,
         the request should be identical to before this was added.
@@ -127,7 +127,7 @@ class LaunchpadTest(VCRTestCase):
                 "discharge_macaroon", complete_auth_kwargs["data"]
             )
 
-    def test_06_complete_snap_authorization_can_reauthorize(self):
+    def test_09_complete_snap_authorization_can_reauthorize(self):
         """
         Existing (already created) snaps can be re-authorized directly,
         without going through create_snap again, so that snaps whose
@@ -148,7 +148,7 @@ class LaunchpadTest(VCRTestCase):
                 kwargs["data"]["discharge_macaroon"], "discharge-macaroon"
             )
 
-    def test_06_get_builders_status(self):
+    def test_10_get_builders_status(self):
         result = self.lp_for_snaps.get_builders_status()
 
         for architecture in result.values():
@@ -156,7 +156,7 @@ class LaunchpadTest(VCRTestCase):
             self.assertIn("total_jobs_duration", architecture.keys())
             self.assertIn("estimated_duration", architecture.keys())
 
-    def test_07_get_snap_build_status(self):
+    def test_11_get_snap_build_status(self):
         result = self.lp_for_snaps.get_snap_build_status("toto")
 
         for architecture in result.values():
